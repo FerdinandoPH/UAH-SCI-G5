@@ -42,4 +42,21 @@ ylabel('Mínimo de la fila');
 title('Mínimos por fila');
 
 medias = mean(M, 2); %aquí el 2 también indica que es por fila
+disp("Medias de cada fila:")
+disp(medias)
+figure;
+bar(x, medias);
+xticks(1:tam);
+xlabel('Número de fila');
+ylabel('Media de la fila');
+title('Medias por fila');
 
+varianzas = var(M, 0, 2); %aquí el 2 también indica que es por fila y el 0 normaliza la varianza
+disp("Varianzas de cada fila:")
+disp(varianzas)
+figure;
+bar(x, varianzas);
+xticks(1:tam);
+xlabel('Número de fila');
+ylabel('Varianza de la fila');
+title('Varianzas por fila');
