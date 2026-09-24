@@ -18,7 +18,7 @@ zlabel('z');
 title('Superficie');
 
 subplot(2,2,3); % Abajo a la izquierda
-mesh(X,Y,Z); % Como surf, pero sin caras ni color
+mesh(X,Y,Z); % Como surf, pero sin caras (el color pasa a la malla)
 xlabel('x');
 ylabel('y');
 zlabel('z');
