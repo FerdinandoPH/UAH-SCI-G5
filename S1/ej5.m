@@ -26,11 +26,26 @@ xlabel('z');
 ylabel('F1(z)');
 title('Transformada z: F1(z)');
 
-% Apartado 2 aquí
+f2 = sin(k) * exp(-a * k);
+F2 = ztrans(f2, k, z);
+disp("Z(f2(k)) = "); pretty(F2)
+
+f2vec = double(subs(subs(f2,a,1),k,kvec)); %Se usa a=1 para poder representarlo en el gráfico
+
+figure;
+subplot(1,2,1);
+stem(kvec, f2vec);
+xlabel('k');
+ylabel('f2(k)');
+title('Señal original f2(k) = sen(k) * e^-ak');
+
+subplot(1,2,2);
+fplot(subs(F2, a, 1), [1.1 10]);
+xlabel('z');
+ylabel('F2(z)');
+title('Transformada z: F2(z)');
 
 
-
-%---
 % T(z) = (0.4z^2)/(z^3 -1z^2 + 0.1z + 0.02)
 f3_num = [0.4 0 0]; % Coeficientes del numerador (de mayor a menor grado de z)
 f3_denom = [1 -1 0.1 0.02]; % Lo mismo para el denominador
