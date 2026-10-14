@@ -8,7 +8,7 @@ clc; close all; clearvars; rng(42);
 [D, N] = size(inputs);
 C = size(targets,1);
 figure;
-% TODO: plotear inputs vs targets
+% TODO: plotear inputs vs targets ✔
 plot(inputs,targets,".-");
 title('Función objetivo de la regresión');
 xlabel('Vector de entrada');
@@ -18,9 +18,9 @@ ylabel('Vector Target');
 % 2) Partición 70/15/15
 % ---------------------------
 idx = randperm(N);
-nTrain = floor(N*0.7); % TODO: porcentaje para entrenamiento (70%)
-nVal = floor(N*0.15); % TODO: porcentaje para validación (15%)
-nTest = N - nTrain - nVal ; % TODO: porcentaje para test (15%)
+nTrain = floor(N*0.7); % TODO: porcentaje para entrenamiento (70%) ✔
+nVal = floor(N*0.15); % TODO: porcentaje para validación (15%) ✔
+nTest = N - nTrain - nVal ; % TODO: porcentaje para test (15%) ✔
 
 iTrain = idx(1:nTrain);
 iVal = idx(nTrain+1 : nTrain+nVal);
@@ -61,10 +61,10 @@ for e = 1:epochs
 
     % BACKWARD (apartado 4)
     G = backward_regression(Xtr, Ttr, Ytr, cacheTr, P, actName, lambda);
-    P.W1 = P.W1 - lr * G.dW1; % TODO: actualizar pesos capa oculta
-    P.b1 = P.b1 - lr * G.db1; % TODO: actualizar bias capa oculta
-    P.W2 = P.W2 - lr * G.dW2; % TODO: actualizar pesos capa salida
-    P.b2 = P.b2 - lr * G.db2; % TODO: actualizar bias capa salida
+    P.W1 = P.W1 - lr * G.dW1; % TODO: actualizar pesos capa oculta ✔
+    P.b1 = P.b1 - lr * G.db1; % TODO: actualizar bias capa oculta ✔
+    P.W2 = P.W2 - lr * G.dW2; % TODO: actualizar pesos capa salida ✔
+    P.b2 = P.b2 - lr * G.db2; % TODO: actualizar bias capa salida ✔
 
     % Validación y test (solo para curvas)
     [Yva, ~] = forward_regression(Xva, P, actName);
@@ -94,15 +94,15 @@ end
 % Apartado 3
 function [Y, cache] = forward_regression(X, P, actName)
     % X: D x N -> Z1=W1*X+b1 ; A1=act(Z1) ; Y=W2*A1 + b2 (lineal)
-    Z1 = P.W1 * X + P.b1; % TODO: calcular combinación lineal capa oculta
+    Z1 = P.W1 * X + P.b1; % TODO: calcular combinación lineal capa oculta ✔
     switch lower(actName) 
-        case 'tansig', A1 = tansig(Z1); % TODO: A1=f(Z1)
+        case 'tansig', A1 = tansig(Z1); % TODO: A1=f(Z1) ✔
         case 'logsig', A1 = logsig(Z1);
         case 'relu', A1 = max(0, Z1);
         case 'purelin',A1 = Z1;
         otherwise, A1 = feval(actName, Z1);
     end
-    Y = P.W2 * A1 + P.b2; % TODO: calcular salida final
+    Y = P.W2 * A1 + P.b2; % TODO: calcular salida final ✔
     cache = struct('Z1',Z1,'A1',A1);
 end
 
@@ -114,21 +114,21 @@ function G = backward_regression(X, T, Y, cache, P, actName, lambda)
     m = size(X,2);
     A1 = cache.A1; Z1 = cache.Z1;
 
-    dY = 2 * (Y - T) / m; % TODO: dY
-    G.dW2 = dY * A1' + lambda * P.W2; % TODO: dW2
-    G.db2 = sum(dY, 2); % TODO: db2
+    dY = 2 * (Y - T) / m; % TODO: dY ✔
+    G.dW2 = dY * A1' + lambda * P.W2; % TODO: dW2 ✔
+    G.db2 = sum(dY, 2); % TODO: db2 ✔
 
-    dA1 = P.W2' * dY; % TODO: dA1
+    dA1 = P.W2' * dY; % TODO: dA1 ✔
     switch lower(actName)
-        case 'tansig', dZ1 = dA1 .* (1-A1.^2); % TODO: dZ1
+        case 'tansig', dZ1 = dA1 .* (1-A1.^2); % TODO: dZ1 ✔
         case 'logsig', dZ1 = dA1 .* (A1 .* (1 - A1));
         case 'relu', dZ1 = dA1; dZ1(Z1<=0) = 0;
         case 'purelin',dZ1 = dA1;
         otherwise, dZ1 = dA1; % fallback
     end
     
-    G.dW1 = dZ1 * X'; % TODO: dW1
-    G.db1 = sum(dZ1, 2); % TODO: db1
+    G.dW1 = dZ1 * X'; % TODO: dW1 ✔
+    G.db1 = sum(dZ1, 2); % TODO: db1 ✔
 end
 
 
@@ -136,5 +136,5 @@ end
 function m = mse_loss(Y, T)
 % MSE medio por muestra y salida (independiente de dimensiones)
     C = size(T,1);
-    m = mean((Y - T).^2); % TODO: calcular MSE
+    m = mean((Y - T).^2); % TODO: calcular MSE ✔
 end
