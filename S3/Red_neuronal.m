@@ -136,5 +136,5 @@ end
 function m = mse_loss(Y, T)
 % MSE medio por muestra y salida (independiente de dimensiones)
     C = size(T,1);
-    m = mean((Y - T).^2); % TODO: calcular MSE ✔
+    m = mean(((Y - T)/C).^2); % TODO: calcular MSE ✔
 end
