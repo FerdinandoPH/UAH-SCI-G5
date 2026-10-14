@@ -79,6 +79,39 @@ for e = 1:epochs
     end
 end
 
+% ---------------------------
+% 5) Evaluación final
+% ---------------------------
+[Yall, ~] = forward_regression(inputs, P, actName);
+errors = Yall - targets;
+meanerror = mean(errors(:));
+performance = mse_loss(Yall, targets); % MSE medio (apartado 5)
+
+fprintf('meanerror = %.6f\n', meanerror);
+fprintf('performance (MSE) = %.6f\n', performance);
+
+% ---------------------------
+% 6) Gráfica de performance (MSE por época)
+% ---------------------------
+figure;
+plot(mseTr, '-', 'LineWidth',1.5); hold on;
+plot(mseVa, '--', 'LineWidth',1.5);
+plot(mseTe, ':', 'LineWidth',1.5);
+grid on; xlabel('Época'); ylabel('MSE');
+legend('Train','Val','Test','Location','best');
+title('Performance (MSE) por época - MLP from scratch');
+
+% ---------------------------
+% 7) Gráfica de inputs/targets vs inputs/Yall
+% ---------------------------
+figure;
+%TODO: plotear inputs vs Yall ✔
+%TODO: plotear inputs vs targets ✔
+plot(inputs, Yall, inputs, targets);
+title('Ajuste de la regresión');
+xlabel('Vector de entrada');
+ylabel('Vector Target vs Estimación');
+
 
 % Apartado 2
 function P = init_params(D, H, C, scale)
