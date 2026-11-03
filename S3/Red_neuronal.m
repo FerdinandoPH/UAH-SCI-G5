@@ -149,7 +149,7 @@ function G = backward_regression(X, T, Y, cache, P, actName, lambda)
 
     dY = 2 * (Y - T) / m; % TODO: dY ✔
     G.dW2 = dY * A1' + lambda * P.W2; % TODO: dW2 ✔
-    G.db2 = sum(dY, 2); % TODO: db2 ✔
+    G.db2 = sum(dY, 2) + lambda * P.b2; % TODO: db2 ✔
 
     dA1 = P.W2' * dY; % TODO: dA1 ✔
     switch lower(actName)
@@ -160,14 +160,13 @@ function G = backward_regression(X, T, Y, cache, P, actName, lambda)
         otherwise, dZ1 = dA1; % fallback
     end
     
-    G.dW1 = dZ1 * X'; % TODO: dW1 ✔
-    G.db1 = sum(dZ1, 2); % TODO: db1 ✔
+    G.dW1 = dZ1 * X' + lambda * P.W1; % TODO: dW1 ✔
+    G.db1 = sum(dZ1, 2) + lambda * P.b1; % TODO: db1 ✔
 end
 
 
 % Apartado 5
 function m = mse_loss(Y, T)
 % MSE medio por muestra y salida (independiente de dimensiones)
-    C = size(T,1);
-    m = mean(((Y - T)/C).^2); % TODO: calcular MSE ✔
+    m = mean((Y - T).^2, 'all'); % TODO: calcular MSE ✔ ('all': media sobre todas las salidas y muestras)
 end
