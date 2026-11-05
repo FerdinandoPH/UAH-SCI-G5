@@ -26,8 +26,10 @@ end
 
 figure;
 semilogy(Hs, median(mseTrain, 2), 'o-', Hs, median(mseTest, 2), 's-', 'LineWidth', 1.5);
+hold on;
+semilogy(Hs, mseTest, '.', 'Color', [0.6 0.6 0.6], 'MarkerSize', 12);   % test de cada red
 grid on;
 xlabel('Neuronas en la capa oculta (H)');
-ylabel('MSE (mediana de 5 redes)');
-legend('Entrenamiento', 'Test');
+ylabel('MSE');
+legend('Entrenamiento (mediana)', 'Test (mediana)', 'Test de cada red', 'Location', 'best');
 title('Error frente al número de neuronas');

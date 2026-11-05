@@ -1,0 +1,8 @@
+H =  1 | MSE train 5.1e-01 | MSE test 4.8e-01 (mediana de 5 redes)
+H =  2 | MSE train 4.3e-02 | MSE test 5.1e-02 (mediana de 5 redes)
+H =  4 | MSE train 9.3e-03 | MSE test 9.7e-03 (mediana de 5 redes)
+H =  6 | MSE train 1.7e-03 | MSE test 2.7e-03 (mediana de 5 redes)
+H =  8 | MSE train 9.7e-04 | MSE test 4.6e-04 (mediana de 5 redes)
+H = 10 | MSE train 6.4e-05 | MSE test 4.8e-04 (mediana de 5 redes)
+H = 15 | MSE train 1.5e-07 | MSE test 3.8e-06 (mediana de 5 redes)
+H = 20 | MSE train 8.4e-07 | MSE test 3.4e-06 (mediana de 5 redes)
