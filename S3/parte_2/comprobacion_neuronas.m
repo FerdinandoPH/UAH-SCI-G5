@@ -1,7 +1,4 @@
-%% Apartado f) Número de neuronas de la capa oculta
-% Se entrenan redes con distinto número de neuronas (H) y se compara su error
-% con los datos de test, que la red no usa para ajustar los pesos.
-% Como el resultado depende de los pesos iniciales, se entrenan R redes por H.
+%% Apartado f)
 close all;
 clear;
 load('datos_control.mat');           % inputs, outputs (de GenerarDatosControl.m)
@@ -15,7 +12,7 @@ for i = 1:numel(Hs)
     for r = 1:R
         rng(r);                                  % para que sea repetible
         net = feedforwardnet(Hs(i));
-        net.trainParam.showWindow = false;       % sin ventana de entrenamiento
+        net.trainParam.showWindow = false;
         [net, tr] = train(net, inputs, outputs);
         mseTrain(i, r) = tr.best_perf;
         mseTest(i, r) = tr.best_tperf;

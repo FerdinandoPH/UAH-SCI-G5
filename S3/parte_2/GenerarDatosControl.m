@@ -1,16 +1,12 @@
-%% Apartado e) Generación de datos de entrenamiento con el controlador "caja negra"
-% Se hacen N simulaciones de PositionControl.slx con destinos (refx, refy)
-% aleatorios dentro del entorno de 10x10 m y se acumulan las entradas
-% (E_d, E_theta) y salidas (V, W) del controlador en las matrices
-% "inputs" (2 x muestras) y "outputs" (2 x muestras).
+%% Apartado e) 
 close all;
 clear;
-rng(42);    % semilla fija: mismos destinos aleatorios en cada ejecución
+rng(42);    % semilla fija
 
 % Tiempo de muestreo
 Ts = 100e-3;
 
-% Generar N posiciones aleatorias, simular y guardar en variables
+% Generar N posiciones aleatorias
 N = 30;
 E_d_vec = [];
 E_theta_vec = [];
@@ -22,7 +18,7 @@ tFinal = zeros(N, 1);        % duración de cada simulación
 trayectorias = cell(N, 1);   % [x y] de cada simulación
 
 for i = 1:N
-    refx = 10*rand - 5;      % rand: uniforme en [0,1] -> [-5, 5] m
+    refx = 10*rand - 5;      % [-5, 5]
     refy = 10*rand - 5;
     sim('PositionControl.slx');
     E_d_vec = [E_d_vec; E_d.signals.values];
@@ -43,7 +39,7 @@ fprintf('outputs: %d x %d\n', size(outputs, 1), size(outputs, 2));
 fprintf('Duración de las simulaciones: entre %.1f y %.1f s (media %.1f s)\n', ...
         min(tFinal), max(tFinal), mean(tFinal));
 
-% Se guardan para el apartado f (entrenamiento de la red)
+% Guardar para entrenar la red más tarde
 save('datos_control.mat', 'inputs', 'outputs', 'refs', 'Ts');
 
 % Trayectorias de las N simulaciones
