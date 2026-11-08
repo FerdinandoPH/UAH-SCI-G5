@@ -1,0 +1,11 @@
+  Name              Size            Bytes  Class     Attributes
+
+  E_d               1x1              2000  struct              
+  E_theta           1x1              2002  struct              
+  V                 1x1              2002  struct              
+  W                 1x1              2002  struct              
+  salida_theta      1x1              2002  struct              
+  salida_x          1x1              2002  struct              
+  salida_y          1x1              2002  struct              
+
+Duración: 5.7 s (58 muestras) | Posición final: (2.0001, 1.9901) | E_d final = 0.0099

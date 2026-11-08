@@ -12,10 +12,14 @@
 
 clc; close all; clearvars; rng(42);   % Limpia, cierra figuras y fija semilla (reproducibilidad)
 
+%% 0) Elección del algoritmo de entrenamiento
+trainFcn = 'traingdm';                % 'traingdm' (clasificador base) | 'trainlm' (segundo apartado)
+
 %% 1) Carga de datos de ejemplo (clasificación)
 % Cada columna es una muestra. 'targets' viene codificado one-hot.
-[inputs, targets] = cancer_dataset;      % binaria (maligno/benigno)
-%[inputs, targets] = simpleclass_dataset;    % multiclase (2 features sintéticos)
+% Mismo dataset que en el ejercicio 3 para poder comparar
+%[inputs, targets] = cancer_dataset;      % binaria (maligno/benigno)
+[inputs, targets] = simpleclass_dataset;    % multiclase (2 features sintéticos, 4 clases)
 
 % Comprobación rápida de dimensiones
 fprintf('inputs:  %d x %d (features x muestras)\n', size(inputs,1), size(inputs,2));
@@ -28,7 +32,7 @@ net = patternnet(hiddenLayerSize);         % MLP para clasificación (softmax + 
 % (Opcional) Algoritmo de entrenamiento:
 % net.trainFcn = 'trainscg';               % por defecto en patternnet (bueno y robusto)
 % net.trainFcn = 'trainlm';                % LM: muy rápido en datasets pequeños
-net.trainFcn = 'traingdm';                 % descenso gradiente con momento  
+net.trainFcn = trainFcn;                   % algoritmo elegido en la sección 0
 
 % División aleatoria 70/15/15 (train/val/test) para early stopping y evaluación final
 net.divideFcn = 'dividerand';              % división aleatoria por defecto
@@ -75,28 +79,31 @@ accTest = mean(tTest == yTest);
 % Pérdida global (cross-entropy) con la performFcn de la red
 perfAll = perform(net, targets, outputs);
 
+fprintf('\n=== %s ===\n', trainFcn);
+fprintf('Épocas: %d | Parada: %s\n', tr.num_epochs, tr.stop);
 fprintf('Accuracy  |  Train: %.3f   Val: %.3f   Test: %.3f   (Global: %.3f)\n', ...
         accTrain, accVal, accTest, accAll);
-fprintf('Cross-entropy (perform) global: %.4f\n', perfAll);
+fprintf('Pérdida (%s) global: %.4f\n', net.performFcn, perfAll);  % crossentropy con traingdm, mse con trainlm
 
-%% 5) Visualizaciones principales (Opcional)
+%% 5) Visualizaciones principales
 % Curva de performance (pérdida) por época: train/val/test
-%figure('Name','Performance');
-%plotperform(tr); title('Performance (Cross-Entropy) por época');
+figure('Name','Performance');
+plotperform(tr); title(sprintf('Performance (%s) por época – %s', net.performFcn, trainFcn));
 
 % Matriz de confusión (Test). También puedes trazar la global si quieres.
-%figure('Name','Confusion (Test)');
-%plotconfusion(targets(:, iTest), outputs(:, iTest));
-%title(sprintf('Matriz de confusión (Test) – Acc=%.3f', accTest));
+figure('Name','Confusion (Test)');
+plotconfusion(targets(:, iTest), outputs(:, iTest));
+title(sprintf('Matriz de confusión (Test) – %s – Acc=%.3f', trainFcn, accTest));
 
 % Curvas ROC (one-vs-all si hay varias clases)
-% figure('Name','ROC (Train/Val/Test)');
-% plotroc(targets(:,iTrain), outputs(:,iTrain), ...
-%         targets(:,iVal),   outputs(:,iVal),   ...
-%         targets(:,iTest),  outputs(:,iTest));
+% Con varios conjuntos, plotroc necesita un nombre tras cada par (targets, outputs)
+figure('Name','ROC (Train/Val/Test)');
+plotroc(targets(:,iTrain), outputs(:,iTrain), 'Train', ...
+        targets(:,iVal),   outputs(:,iVal),   'Validation', ...
+        targets(:,iTest),  outputs(:,iTest),  'Test');
 
 % Estado del entrenamiento (gradiente, validation checks, etc.)
-% figure('Name','Estado de entrenamiento'); plottrainstate(tr);
+figure('Name','Estado de entrenamiento'); plottrainstate(tr);
 
 % (Opcional) Visualización de la arquitectura
 % view(net);

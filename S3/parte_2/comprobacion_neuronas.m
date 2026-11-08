@@ -1,0 +1,32 @@
+%% Apartado f)
+close all;
+clear;
+load('datos_control.mat');           % inputs, outputs (de GenerarDatosControl.m)
+
+Hs = [1 2 4 6 8 10 15 20];           % neuronas a probar
+R = 5;                               % redes por cada H
+mseTrain = zeros(numel(Hs), R);
+mseTest = zeros(numel(Hs), R);
+
+for i = 1:numel(Hs)
+    for r = 1:R
+        rng(r);                                  % para que sea repetible
+        net = feedforwardnet(Hs(i));
+        net.trainParam.showWindow = false;
+        [net, tr] = train(net, inputs, outputs);
+        mseTrain(i, r) = tr.best_perf;
+        mseTest(i, r) = tr.best_tperf;
+    end
+    fprintf('H = %2d | MSE train %.1e | MSE test %.1e (mediana de %d redes)\n', ...
+            Hs(i), median(mseTrain(i, :)), median(mseTest(i, :)), R);
+end
+
+figure;
+semilogy(Hs, median(mseTrain, 2), 'o-', Hs, median(mseTest, 2), 's-', 'LineWidth', 1.5);
+hold on;
+semilogy(Hs, mseTest, '.', 'Color', [0.6 0.6 0.6], 'MarkerSize', 12);   % test de cada red
+grid on;
+xlabel('Neuronas en la capa oculta (H)');
+ylabel('MSE');
+legend('Entrenamiento (mediana)', 'Test (mediana)', 'Test de cada red', 'Location', 'best');
+title('Error frente al número de neuronas');

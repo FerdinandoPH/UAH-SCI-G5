@@ -1,0 +1,3 @@
+inputs:  2 x 1998
+outputs: 2 x 1998
+Duración de las simulaciones: entre 5.1 y 7.4 s (media 6.6 s)
