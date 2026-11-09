@@ -1,4 +1,4 @@
-%% CLASIFICACIÓN con red feedforward (patternnet) – Script base 
+%% CLASIFICACIÓN con red feedforward (patternnet) - Script base 
 % Objetivo:
 %   - Cargar un dataset de clasificación (targets en one-hot)
 %   - Crear y entrenar una MLP para reconocimiento de patrones (patternnet)
@@ -88,12 +88,12 @@ fprintf('Pérdida (%s) global: %.4f\n', net.performFcn, perfAll);  % crossentrop
 %% 5) Visualizaciones principales
 % Curva de performance (pérdida) por época: train/val/test
 figure('Name','Performance');
-plotperform(tr); title(sprintf('Performance (%s) por época – %s', net.performFcn, trainFcn));
+plotperform(tr); title(sprintf('Performance (%s) por época - %s', net.performFcn, trainFcn));
 
 % Matriz de confusión (Test). También puedes trazar la global si quieres.
 figure('Name','Confusion (Test)');
 plotconfusion(targets(:, iTest), outputs(:, iTest));
-title(sprintf('Matriz de confusión (Test) – %s – Acc=%.3f', trainFcn, accTest));
+title(sprintf('Matriz de confusión (Test) - %s - Acc=%.3f', trainFcn, accTest));
 
 % Curvas ROC (one-vs-all si hay varias clases)
 % Con varios conjuntos, plotroc necesita un nombre tras cada par (targets, outputs)

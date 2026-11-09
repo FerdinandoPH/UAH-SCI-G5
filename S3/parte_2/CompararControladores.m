@@ -50,7 +50,7 @@ fprintf('Error entre trayectorias: medio %.2f mm, máximo %.2f mm\n', ...
         1000*mean(errMedio), 1000*max(errMax));
 fprintf('Diferencia de duración: máxima %.1f s\n', max(abs(tFin(:, 1) - tFin(:, 2))));
 
-% Trayectorias superpuestas: original continua, red discontinua
+% Trayectorias superpuestas (original continua, red discontinua)
 figure;
 hold on; grid on; axis equal;
 for i = 1:N
@@ -61,7 +61,7 @@ plot(refs(:, 1), refs(:, 2), 'kx', 'MarkerSize', 8, 'LineWidth', 1.5);   % desti
 xlim([-5 5]); ylim([-5 5]);
 xlabel('x (m)'); ylabel('y (m)');
 legend([h1 h2], 'Controlador original', 'Controlador neuronal', 'Location', 'bestoutside');
-title(sprintf('Trayectorias hacia %d destinos nuevos', N));
+title(sprintf('Trayectorias hacia %d destinos', N));
 
 % Error entre trayectorias en cada destino
 figure;

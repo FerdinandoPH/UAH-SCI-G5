@@ -1,4 +1,4 @@
-%% CLASIFICACIÓN con red feedforward (patternnet) – Script base 
+%% CLASIFICACIÓN con red feedforward (patternnet) - Script base 
 % Objetivo:
 %   - Cargar un dataset de clasificación (targets en one-hot)
 %   - Crear y entrenar una MLP para reconocimiento de patrones (patternnet)
@@ -87,7 +87,7 @@ fprintf('Cross-entropy (perform) global: %.4f\n', perfAll);
 % Matriz de confusión (Test). También puedes trazar la global si quieres.
 %figure('Name','Confusion (Test)');
 %plotconfusion(targets(:, iTest), outputs(:, iTest));
-%title(sprintf('Matriz de confusión (Test) – Acc=%.3f', accTest));
+%title(sprintf('Matriz de confusión (Test) - Acc=%.3f', accTest));
 
 % Curvas ROC (one-vs-all si hay varias clases)
 % figure('Name','ROC (Train/Val/Test)');

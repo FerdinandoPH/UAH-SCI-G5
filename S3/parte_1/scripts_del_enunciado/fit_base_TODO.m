@@ -1,4 +1,4 @@
-%% REGRESIÓN con red feedforward (fitnet) – Script base 
+%% REGRESIÓN con red feedforward (fitnet) - Script base 
 % Objetivo:
 %   - Cargar un dataset de regresión de la toolbox
 %   - Crear y entrenar una MLP con una capa oculta (fitnet)
