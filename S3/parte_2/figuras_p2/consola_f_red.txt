@@ -1,0 +1,5 @@
+Épocas: 213 (mejor época 207) | parada: Training finished: Met validation criterion
+MSE entrenamiento 2.87e-06 | validación 7.70e-06 | test 3.85e-06
+trainInd: 1398 muestras | R(V) = 0.999999 | R(W) = 0.999997
+valInd:  300 muestras | R(V) = 0.999995 | R(W) = 0.999997
+testInd:  300 muestras | R(V) = 0.999998 | R(W) = 0.999996
