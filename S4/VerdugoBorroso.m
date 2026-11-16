@@ -1,3 +1,5 @@
+%Programa para 'ejecutar' el modelo de Simulink
+
 %Tiempo de muestreo
 Ts=100e-3
 % Referencia x-y de posicion
