@@ -17,7 +17,7 @@ Range=[0 15]
 NumMFs=3
 MF1='MUY_PEQUEÑO':'trimf',[-1 0 0.6]
 MF2='PEQUEÑO':'trimf',[0.2 1.5 4]
-MF3='GRANDE':'trimf',[2.5 8 21.25]
+MF3='GRANDE':'trapmf',[2.5 8 15 15]
 
 [Input2]
 Name='E_theta'
@@ -26,8 +26,8 @@ NumMFs=5
 MF1='NEGATIVO':'trimf',[-2.356 -1.178 0]
 MF2='CERO':'trimf',[-0.7854 0 0.7854]
 MF3='POSITIVO':'trimf',[0 1.178 2.356]
-MF4='MUY_NEGATIVO':'trimf',[-9.425 -3.142 -1.571]
-MF5='MUY_POSITIVO':'trimf',[1.571 3.142 9.425]
+MF4='MUY_NEGATIVO':'trimf',[-9.425 -3.142 -1.178]
+MF5='MUY_POSITIVO':'trimf',[1.178 3.142 9.425]
 
 [Output1]
 Name='V'
