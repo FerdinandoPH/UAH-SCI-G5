@@ -5,11 +5,12 @@ refx=10*rand-5;
 refy=10*rand-5;
 disp([refx,refy])
 % Ejecutar Simulacion
-sim('PositionControl.slx')
+sim('PositionControlBorroso_1destino.slx')
 % Mostrar
 x=salida_x.signals.values;
 y=salida_y.signals.values;
 figure;
-plot(x,y);
 grid on;
 hold on;
+plot(x,y);
+plot(refx, refy, 'rx', 'MarkerSize', 10, 'LineWidth', 2);
